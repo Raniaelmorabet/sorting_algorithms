@@ -28,4 +28,12 @@ void bubble_sort(int *array, size_t size);
 /* 1. Insertion sort */
 void insertion_sort_list(listint_t **list);
 
+/* 2. Selection sort */
+void selection_sort(int *array, size_t size);
+
+/* 3.Quick sort */
+void quicksort_recursive(int *array, int low, int high);
+int partition(int *array, int low, int high);
+void quicksort_recursive(int *array, int low, int high);
+void quick_sort(int *array, size_t size);
 #endif /* SORT_H */
