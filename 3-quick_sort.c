@@ -59,6 +59,8 @@ int lomuto_partition(int *array, int low, int high)
     if (array[i + 1] != array[high])
         swap(&array[i + 1], &array[high]);
 
+    print_array(array + low, high - low + 1);
+
     return (i + 1);
 }
 
