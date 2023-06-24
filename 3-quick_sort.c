@@ -1,5 +1,30 @@
 #include "sort.h"
-#include <stdio.h>
+
+/**
+ * partition - array partition
+ * @array: array to sort
+ * @low: lowest index
+ * @high: highest index
+ * Return: int pivot index
+ */
+int partition(int *array, int low, int high);
+
+/**
+ * quick_sort_recursive - sorts an array of integers recursively
+ * @array: array to sort
+ * @low: lowest index
+ * @high: highest index
+ */
+void quick_sort_recursive(int *array, int low, int high);
+
+/**
+ * quick_sort - sorts an array of integers using the Quick
+ * sort algorithm in ascending order
+ * @array: array to sort
+ * @size: array size
+ */
+void quick_sort(int *array, size_t size);
+
 /**
  * partition - array partition
  * @array: array to sort
@@ -62,8 +87,5 @@ void quick_sort_recursive(int *array, int low, int high)
  */
 void quick_sort(int *array, size_t size)
 {
-    if (array == NULL || size < 2)
-        return;
-
     quick_sort_recursive(array, 0, size - 1);
 }
