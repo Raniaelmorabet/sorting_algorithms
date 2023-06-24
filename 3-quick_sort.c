@@ -9,73 +9,65 @@
  */
 void quick_sort(int *array, size_t size)
 {
-    if (array == NULL || size < 2)
-        return;
+	if (array == NULL || size < 2)
+		return;
 
-    quicksort(array, 0, size - 1);
+	quicksort(array, 0, size - 1);
 }
 
 /**
  * quicksort - recursive function to perform Quick sort
  * @array: the array to sort
- * @low: the low index of the sort range
- * @high: the high index of the sort range
+ * @lo: the low index of the sort range
+ * @hi: the high index of the sort range
  *
  * Return: void
  */
-void quicksort(int *array, int low, int high)
+void quicksort(int *array, int lo, int hi)
 {
-    if (low < high)
-    {
-        int pivot = lomuto_partition(array, low, high);
-        quicksort(array, low, pivot - 1);
-        quicksort(array, pivot + 1, high);
-    }
+	if (lo < hi)
+	{
+		int p = lomuto_partition(array, lo, hi);
+		quicksort(array, lo, p - 1);
+		quicksort(array, p + 1, hi);
+	}
 }
 
 /**
  * lomuto_partition - partitions the array using Lomuto scheme
  * @array: the array to sort
- * @low: the low index of the sort range
- * @high: the high index of the sort range
+ * @lo: the low index of the sort range
+ * @hi: the high index of the sort range
  *
  * Return: the index of the pivot
  */
-int lomuto_partition(int *array, int low, int high)
+int lomuto_partition(int *array, int lo, int hi)
 {
-    int pivot = array[high];
-    int i = low - 1;
-    int j;
+	int pivot = array[hi];
+	int i = lo - 1;
+	int j, temp;
 
-    for (j = low; j <= high - 1; j++)
-    {
-        if (array[j] <= pivot)
-        {
-            i++;
-            if (i != j)
-                swap(&array[i], &array[j]);
-        }
-    }
-    if (array[i + 1] != array[high])
-        swap(&array[i + 1], &array[high]);
+	for (j = lo; j <= hi - 1; j++)
+	{
+		if (array[j] <= pivot)
+		{
+			i++;
+			if (i != j)
+			{
+				temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+				print_array(array, hi + 1);
+			}
+		}
+	}
+	if (array[i + 1] != array[hi])
+	{
+		temp = array[i + 1];
+		array[i + 1] = array[hi];
+		array[hi] = temp;
+		print_array(array, hi + 1);
+	}
 
-    print_array(array + low, high - low + 1);
-
-    return (i + 1);
-}
-
-/**
- * swap - swaps two integer values
- * @a: pointer to the first value
- * @b: pointer to the second value
- *
- * Return: void
- */
-void swap(int *a, int *b)
-{
-    int temp;
-
-    temp = *a;
-    *a = *b;
-    *b = temp;
+	return (i + 1);
 }
