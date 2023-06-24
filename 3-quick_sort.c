@@ -9,7 +9,7 @@
  */
 void quick_sort(int *array, size_t size)
 {
-	if (!array || size < 2)
+	if (array == NULL || size < 2)
 		return;
 
 	quicksort(array, 0, size - 1);
@@ -45,28 +45,21 @@ void quicksort(int *array, int low, int high)
  */
 int lomuto_partition(int *array, int low, int high)
 {
-	int i, j, pivot;
+	int i, j;
+	int pivot = array[high];
 
-	pivot = array[high];
 	i = low - 1;
-
 	for (j = low; j <= high - 1; j++)
 	{
-		if (array[j] <= pivot)
+		if (array[j] < pivot)
 		{
 			i++;
 			if (i != j)
-			{
 				swap(&array[i], &array[j]);
-				print_array(array, high + 1);
-			}
 		}
 	}
-	if ((i + 1) != high)
-	{
+	if (array[i + 1] != array[high])
 		swap(&array[i + 1], &array[high]);
-		print_array(array, high + 1);
-	}
 
 	return (i + 1);
 }
