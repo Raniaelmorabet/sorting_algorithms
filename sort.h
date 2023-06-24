@@ -69,6 +69,9 @@ void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
+void swap(int *a, int *b);
+int lomuto_partition(int *array, int low, int high);
+void quicksort(int *array, int low, int high);
 
 /* ---- Advanced ---- */
 void shell_sort(int *array, size_t size);
@@ -81,12 +84,4 @@ void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 void sort_deck(deck_node_t **deck);
 
-/* 2. Selection sort */
-void selection_sort(int *array, size_t size);
-
-/* 3.Quick sort */
-void quicksort_recursive(int *array, int low, int high);
-int partition(int *array, int low, int high);
-void quicksort_recursive(int *array, int low, int high);
-void quick_sort(int *array, size_t size);
 #endif /* SORT_H */
