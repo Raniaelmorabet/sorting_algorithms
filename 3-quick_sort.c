@@ -1,82 +1,59 @@
 #include "sort.h"
-#include <stdio.h>
+
 /**
  * partition - array partition
  * @array: array to sort
- * @low: lowest index
- * @high: highest index
- * Return: int pivot index
- */
-int partition(int *array, int low, int high);
-
-/**
- * quick_sort_recursive - sorts an array of integers recursively
- * @array: array to sort
- * @low: lowest index
- * @high: highest index
- */
-void quick_sort_recursive(int *array, int low, int high);
-
-/**
- * quick_sort - sorts an array of integers using the Quick
- * sort algorithm in ascending order
- * @array: array to sort
+ * @first: first position
+ * @last: last position
  * @size: array size
- */
-void quick_sort(int *array, size_t size);
-
-/**
- * partition - array partition
- * @array: array to sort
- * @low: lowest index
- * @high: highest index
  * Return: int pivot index
  */
-int partition(int *array, int low, int high)
+int partition(int *array, int first, int last, size_t size)
 {
-    int pivot = array[high];
-    int i = (low - 1);
+	int i = first - 1, aux, k;
 
-    for (int j = low; j <= high - 1; j++)
-    {
-        if (array[j] < pivot)
-        {
-            i++;
-            if (i != j)
-            {
-                int temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-                print_array(array, high + 1);
-            }
-        }
-    }
+	for (k = first; k <= last - 1; k++)
+	{
+		if (array[k] < array[last])
+		{
+			i++;
+			if (i < k)
+			{
+				aux = array[i];
+				array[i] = array[k];
+				array[k] = aux;
+				print_array(array, size);
+			}
+		}
+	}
+	if (array[i + 1] > array[last])
+	{
+		aux = array[i + 1];
+		array[i + 1] = array[last];
+		array[last] = aux;
+		print_array(array, size);
+	}
 
-    if (array[i + 1] > array[high])
-    {
-        int temp = array[i + 1];
-        array[i + 1] = array[high];
-        array[high] = temp;
-        print_array(array, high + 1);
-    }
-
-    return (i + 1);
+	return (i + 1);
 }
 
 /**
- * quick_sort_recursive - sorts an array of integers recursively
+ * qs - sorts an array of integers recursively
  * @array: array to sort
- * @low: lowest index
- * @high: highest index
+ * @first: first position
+ * @last: last position
+ * @size: array size
  */
-void quick_sort_recursive(int *array, int low, int high)
+void qs(int *array, int first, int last, size_t size)
 {
-    if (low < high)
-    {
-        int pivot = partition(array, low, high);
-        quick_sort_recursive(array, low, pivot - 1);
-        quick_sort_recursive(array, pivot + 1, high);
-    }
+	int pivot;
+
+	if (first < last)
+	{
+		pivot = partition(array, first, last, size);
+		qs(array, first, pivot - 1, size);
+		qs(array, pivot + 1, last, size);
+	}
 }
 
 /**
@@ -87,5 +64,5 @@ void quick_sort_recursive(int *array, int low, int high)
  */
 void quick_sort(int *array, size_t size)
 {
-    quick_sort_recursive(array, 0, size - 1);
+	qs(array, 0, size - 1, size);
 }
