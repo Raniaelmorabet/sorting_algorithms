@@ -39,7 +39,9 @@ void radix_sort(int *array, size_t size);
 void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 void swap_nodes(listint_t **list, listint_t **left, listint_t **right);
-void merge(int *array, int *left, size_t left_size,
-           int *right, size_t right_size);
+void print_left_right(int *array, int size, int first, int mid);
+void merge(int *array, int size, int *cpy, int first, int mid);
+void mergeSort(int *cpy, int first, int size, int *array);
+void copy_array(int *arr, int *cpy, int size);
 
 #endif /* SORT_H */
