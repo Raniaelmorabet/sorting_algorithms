@@ -11,7 +11,7 @@
  * @right_size: Size of the right subarray
  **/
 void merge(int *array, int *left, size_t left_size,
-           int *right, size_t right_size);
+int *right, size_t right_size);
 {
 	size_t i = 0, j = 0, k = 0;
 	size_t size = left_size + right_size;
