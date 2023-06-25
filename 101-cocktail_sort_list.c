@@ -6,7 +6,7 @@
  * @left: Pointer to the first node
  * @right: Pointer to the second node
  **/
-static void swap_nodes(listint_t **list, listint_t **left, listint_t **right)
+void swap_nodes(listint_t **list, listint_t **left, listint_t **right)
 {
 	listint_t *temp_left = *left;
 	listint_t *temp_right = *right;
