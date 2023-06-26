@@ -1,69 +1,50 @@
-#include <stdlib.h>
-#include <string.h>
 #include "deck.h"
+#include <stdlib.h>
 
 /**
- * compare_cards - Compare two card pointers for sorting.
- * @card1: Pointer to the first card.
- * @card2: Pointer to the second card.
- * Return: Negative value if card1 should come before card2
+ * compare_cards - Compare function for qsort to compare deck nodes
+ * @a: Pointer to the first deck node
+ * @b: Pointer to the second deck node
+ *
+ * Return: Negative if a < b, 0 if a == b, Positive if a > b
  */
-int compare_cards(const void *card1, const void *card2)
+int compare_cards(const void *a, const void *b)
 {
-    const card_t *c1 = *(const card_t **)card1;
-    const card_t *c2 = *(const card_t **)card2;
-    const char *values[] = {"Jack", "4", "3", "Queen", "5", "10", "6", "9", "7", "King", "8", "2", "Ace"};
+    const deck_node_t *node1 = *(const deck_node_t **)a;
+    const deck_node_t *node2 = *(const deck_node_t **)b;
 
-    int index1 = -1, index2 = -1;
-    int i;
+    int value_cmp = strcmp(node1->card->value, node2->card->value);
+    if (value_cmp != 0)
+        return value_cmp;
 
-    for (i = 0; i < 13; i++) {
-        if (strcmp(c1->value, values[i]) == 0) {
-            index1 = i;
-            break;
-        }
-    }
-
-    for (i = 0; i < 13; i++) {
-        if (strcmp(c2->value, values[i]) == 0) {
-            index2 = i;
-            break;
-        }
-    }
-
-    if (index1 != index2)
-        return index1 - index2;
-
-    /* Sort by kind if values are the same */
-    if (c1->kind != c2->kind)
-        return c1->kind - c2->kind;
-
-    return 0;
+    return (int)(node1->card->kind) - (int)(node2->card->kind);
 }
 
 /**
- * sort_deck - Sort a deck of cards in-place.
- * @deck: Pointer to the head of the deck.
+ * sort_deck - Sorts a deck of cards in ascending order
+ * @deck: Double pointer to the head of the deck
  */
 void sort_deck(deck_node_t **deck)
 {
+    size_t size = 52;
+    deck_node_t *nodes[52];
+
+    deck_node_t *current = *deck;
     size_t i = 0;
-    size_t count = 0;
-    deck_node_t *node = *deck;
-    card_t *cards[52];
-
-    while (node != NULL)
+    while (current != NULL)
     {
-        cards[count++] = (card_t *)node->card;
-        node = node->next;
+        nodes[i++] = current;
+        current = current->next;
     }
 
-    qsort(cards, count, sizeof(card_t *), compare_cards);
+    qsort(nodes, size, sizeof(deck_node_t *), compare_cards);
 
-    node = *deck;
-    while (node != NULL)
+    for (i = 0; i < size - 1; i++)
     {
-        node->card = cards[i++];
-        node = node->next;
+        nodes[i]->next = nodes[i + 1];
+        nodes[i + 1]->prev = nodes[i];
     }
+    nodes[size - 1]->next = NULL;
+
+    *deck = nodes[0];
 }
