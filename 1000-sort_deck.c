@@ -33,7 +33,8 @@ int compare_cards(const void *card1, const void *card2)
 
     if (index1 != index2)
         return index1 - index2;
-    
+
+    // Sort by kind if values are the same
     if (c1->kind != c2->kind)
         return c1->kind - c2->kind;
 
@@ -59,7 +60,8 @@ void sort_deck(deck_node_t **deck)
     qsort(cards, count, sizeof(card_t *), compare_cards);
 
     node = *deck;
-    for (size_t i = 0; i < count; i++)
+    size_t i;
+    for (i = 0; i < count; i++)
     {
         node->card = cards[i];
         node = node->next;
