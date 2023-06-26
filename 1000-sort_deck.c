@@ -30,6 +30,7 @@ void sort_deck(deck_node_t **deck)
 {
     deck_node_t *current, *next;
     card_t *temp_card;
+    const deck_node_t *temp_node;
 
     if (deck == NULL || *deck == NULL || (*deck)->next == NULL)
         return;
@@ -43,9 +44,14 @@ void sort_deck(deck_node_t **deck)
         {
             if (compare_cards(current->card, next->card) > 0)
             {
-                temp_card = current->card;
+                temp_card = (card_t *)current->card;
+                temp_node = current;
+
                 current->card = next->card;
-                next->card = temp_card;
+                current = next;
+
+                next->card = (const card_t *)temp_card;
+                next = temp_node;
             }
             next = next->next;
         }
