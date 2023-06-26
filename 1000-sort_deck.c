@@ -12,7 +12,8 @@ int compare_cards(const void *card1, const void *card2)
 {
     const card_t *c1 = *(const card_t **)card1;
     const card_t *c2 = *(const card_t **)card2;
-    const char *values[] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+    const char *values[] = {"Jack", "4", "3", "Queen", "5", "10", "6", "9", "7", "King", "8", "2", "Ace"};
+    const char *kinds[] = {"C", "H", "D", "S"};
 
     int index1 = -1, index2 = -1;
     int i;
@@ -34,7 +35,24 @@ int compare_cards(const void *card1, const void *card2)
     if (index1 != index2)
         return index1 - index2;
 
-    return c1->kind - c2->kind;
+    // Sort by kind if values are the same
+    int kind_index1 = -1, kind_index2 = -1;
+
+    for (i = 0; i < 4; i++) {
+        if (strcmp(c1->kind, kinds[i]) == 0) {
+            kind_index1 = i;
+            break;
+        }
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (strcmp(c2->kind, kinds[i]) == 0) {
+            kind_index2 = i;
+            break;
+        }
+    }
+
+    return kind_index1 - kind_index2;
 }
 
 /**
