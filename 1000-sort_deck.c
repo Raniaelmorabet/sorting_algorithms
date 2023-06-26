@@ -10,15 +10,28 @@
  */
 int compare_cards(const void *card1, const void *card2)
 {
-	const card_t *c1 = *(const card_t **)card1;
-	const card_t *c2 = *(const card_t **)card2;
+    const card_t *c1 = *(const card_t **)card1;
+    const card_t *c2 = *(const card_t **)card2;
+    const char *values[] = {"Jack", "4", "3", "Queen", "5", "10", "6", "9", "7", "King", "8", "2", "Ace"};
+    
+    int index1 = -1, index2 = -1;
+    for (int i = 0; i < 13; i++) {
+        if (strcmp(c1->value, values[i]) == 0) {
+            index1 = i;
+            break;
+        }
+    }
+    for (int i = 0; i < 13; i++) {
+        if (strcmp(c2->value, values[i]) == 0) {
+            index2 = i;
+            break;
+        }
+    }
 
-	int value_cmp = strcmp(c1->value, c2->value);
+    if (index1 != index2)
+        return index1 - index2;
 
-	if (value_cmp != 0)
-		return (value_cmp);
-
-	return (c1->kind - c2->kind);
+    return c1->kind - c2->kind;
 }
 
 /**
