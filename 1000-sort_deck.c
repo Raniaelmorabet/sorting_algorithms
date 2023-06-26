@@ -51,9 +51,12 @@ void sort_deck(deck_node_t **deck)
                 current = next;
 
                 next->card = (const card_t *)temp_card;
-                next = temp_node;
+                next = temp_node->next;
             }
-            next = next->next;
+            else
+            {
+                next = next->next;
+            }
         }
         current = current->next;
     }
