@@ -7,7 +7,8 @@
  * @a: Pointer to the first deck node
  * @b: Pointer to the second deck node
  *
- * Return: Negative if a < b, 0 if a == b, Positive if a > b
+ * Return: Negative if 'a' is less than 'b', positive if 'a' is greater than 'b',
+ *         0 if 'a' is equal to 'b'
  */
 int compare_cards(const void *a, const void *b)
 {
@@ -18,7 +19,7 @@ int compare_cards(const void *a, const void *b)
     if (value_cmp != 0)
         return value_cmp;
 
-    return (int)(node1->card->kind) - (int)(node2->card->kind);
+    return node1->card->kind - node2->card->kind;
 }
 
 /**
