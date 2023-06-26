@@ -6,7 +6,7 @@
  * compare_cards - Compare two card pointers for sorting.
  * @card1: Pointer to the first card.
  * @card2: Pointer to the second card.
- * Return: Negative value if card1 should come before card2.
+ * Return: Negative value if card1 should come before card2
  */
 int compare_cards(const void *card1, const void *card2)
 {
