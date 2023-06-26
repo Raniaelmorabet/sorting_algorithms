@@ -35,18 +35,17 @@ int compare_cards(const void *card1, const void *card2)
     if (index1 != index2)
         return index1 - index2;
 
-    // Sort by kind if values are the same
     int kind_index1 = -1, kind_index2 = -1;
 
     for (i = 0; i < 4; i++) {
-        if (strcmp(c1->kind, kinds[i]) == 0) {
+        if (c1->kind == (kind_t)i) {
             kind_index1 = i;
             break;
         }
     }
 
     for (i = 0; i < 4; i++) {
-        if (strcmp(c2->kind, kinds[i]) == 0) {
+        if (c2->kind == (kind_t)i) {
             kind_index2 = i;
             break;
         }
