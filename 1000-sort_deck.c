@@ -16,9 +16,9 @@ int compare_cards(const void *card1, const void *card2)
 	int value_cmp = strcmp(c1->value, c2->value);
 
 	if (value_cmp != 0)
-		return value_cmp;
+		return (value_cmp);
 
-	return c1->kind - c2->kind;
+	return (c1->kind - c2->kind);
 }
 
 /**
@@ -32,7 +32,7 @@ void sort_deck(deck_node_t **deck)
 	card_t *cards[52];
 
 	while (node != NULL)
-    {
+	{
 		cards[count++] = (card_t *)node->card;
 		node = node->next;
 	}
@@ -40,8 +40,8 @@ void sort_deck(deck_node_t **deck)
 	qsort(cards, count, sizeof(card_t *), compare_cards);
 
 	node = *deck;
-	for (i = 0; i < count; i++) 
-    {
+	for (i = 0; i < count; i++)
+	{
 		node->card = cards[i];
 		node = node->next;
 	}
