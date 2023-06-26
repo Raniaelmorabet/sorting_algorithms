@@ -1,6 +1,6 @@
-#include<stdlib.h>
-#include<string.h>
-#include"deck.h"
+#include <stdlib.h>
+#include <string.h>
+#include "deck.h"
 
 /**
  * compare_cards - Compare two card pointers for sorting.
