@@ -1,6 +1,3 @@
-#include "deck.h"
-#include <stdlib.h>
-#include <string.h>
 /**
  * swap_nodes - Swaps two deck nodes
  * @deck: Double pointer to the head of the deck
@@ -48,7 +45,6 @@ void sort_deck(deck_node_t **deck)
 {
     deck_node_t *current, *next;
     card_t *temp_card;
-    const deck_node_t *temp_node;
 
     if (deck == NULL || *deck == NULL || (*deck)->next == NULL)
         return;
