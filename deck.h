@@ -25,5 +25,6 @@ typedef struct deck_node_s
 } deck_node_t;
 
 void sort_deck(deck_node_t **deck);
+int compare_cards(const void *card1, const void *card2)
 
 #endif /* DECK_H */
