@@ -12,7 +12,7 @@ int compare_cards(const void *card1, const void *card2)
 {
     const card_t *c1 = *(const card_t **)card1;
     const card_t *c2 = *(const card_t **)card2;
-    const char *values[] = {"Jack", "4", "3", "Queen", "5", "10", "6", "9", "7", "King", "8", "2", "Ace"};
+    const char *values[] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
 
     int index1 = -1, index2 = -1;
     int i;
