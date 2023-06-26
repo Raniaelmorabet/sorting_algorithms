@@ -1,5 +1,6 @@
 #include "deck.h"
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * compare_cards - Compare function for qsort to compare deck nodes
