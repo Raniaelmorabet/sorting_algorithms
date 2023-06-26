@@ -1,3 +1,7 @@
+#include "deck.h"
+#include <stdlib.h>
+#include <string.h>
+
 /**
  * swap_nodes - Swaps two deck nodes
  * @deck: Double pointer to the head of the deck
