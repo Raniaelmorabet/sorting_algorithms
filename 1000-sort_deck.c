@@ -1,25 +1,43 @@
 #include "deck.h"
 #include <stdlib.h>
 #include <string.h>
-
 /**
- * compare_cards - Compare function for qsort to compare deck nodes
- * @a: Pointer to the first deck node
- * @b: Pointer to the second deck node
- *
- * Return: Negative if 'a' is less than 'b', positive if 'a' is greater than 'b',
- *         0 if 'a' is equal to 'b'
+ * swap_nodes - Swaps two deck nodes
+ * @deck: Double pointer to the head of the deck
+ * @node1: Pointer to the first node to be swapped
+ * @node2: Pointer to the second node to be swapped
  */
-int compare_cards(const void *a, const void *b)
+void swap_nodes(deck_node_t **deck, deck_node_t *node1, deck_node_t *node2)
 {
-    const deck_node_t *node1 = *(const deck_node_t **)a;
-    const deck_node_t *node2 = *(const deck_node_t **)b;
+    if (node1->prev != NULL)
+        node1->prev->next = node2;
+    if (node2->next != NULL)
+        node2->next->prev = node1;
 
-    int value_cmp = strcmp(node1->card->value, node2->card->value);
-    if (value_cmp != 0)
-        return value_cmp;
+    if (node1->next == node2)
+    {
+        node1->next = node2->next;
+        node2->prev = node1->prev;
+        node1->prev = node2;
+        node2->next = node1;
+    }
+    else
+    {
+        deck_node_t *node1_next = node1->next;
+        deck_node_t *node1_prev = node1->prev;
+        deck_node_t *node2_next = node2->next;
+        deck_node_t *node2_prev = node2->prev;
 
-    return node1->card->kind - node2->card->kind;
+        node1->next = node2_next;
+        node1->prev = node2_prev;
+        node2->next = node1_next;
+        node2->prev = node1_prev;
+    }
+
+    if (node1->prev == NULL)
+        *deck = node1;
+    else if (node2->prev == NULL)
+        *deck = node2;
 }
 
 /**
@@ -44,19 +62,13 @@ void sort_deck(deck_node_t **deck)
         {
             if (compare_cards(current->card, next->card) > 0)
             {
+                swap_nodes(deck, current, next);
+
                 temp_card = (card_t *)current->card;
-                temp_node = current;
-
                 current->card = next->card;
-                current = next;
-
                 next->card = (const card_t *)temp_card;
-                next = temp_node->next;
             }
-            else
-            {
-                next = next->next;
-            }
+            next = next->next;
         }
         current = current->next;
     }
