@@ -13,7 +13,6 @@ int compare_cards(const void *card1, const void *card2)
     const card_t *c1 = *(const card_t **)card1;
     const card_t *c2 = *(const card_t **)card2;
     const char *values[] = {"Jack", "4", "3", "Queen", "5", "10", "6", "9", "7", "King", "8", "2", "Ace"};
-    const char *kinds[] = {"C", "H", "D", "S"};
 
     int index1 = -1, index2 = -1;
     int i;
@@ -34,24 +33,11 @@ int compare_cards(const void *card1, const void *card2)
 
     if (index1 != index2)
         return index1 - index2;
+    
+    if (c1->kind != c2->kind)
+        return c1->kind - c2->kind;
 
-    int kind_index1 = -1, kind_index2 = -1;
-
-    for (i = 0; i < 4; i++) {
-        if (c1->kind == (kind_t)i) {
-            kind_index1 = i;
-            break;
-        }
-    }
-
-    for (i = 0; i < 4; i++) {
-        if (c2->kind == (kind_t)i) {
-            kind_index2 = i;
-            break;
-        }
-    }
-
-    return kind_index1 - kind_index2;
+    return 0;
 }
 
 /**
@@ -60,7 +46,7 @@ int compare_cards(const void *card1, const void *card2)
  */
 void sort_deck(deck_node_t **deck)
 {
-    size_t i, count = 0;
+    size_t count = 0;
     deck_node_t *node = *deck;
     card_t *cards[52];
 
@@ -73,7 +59,7 @@ void sort_deck(deck_node_t **deck)
     qsort(cards, count, sizeof(card_t *), compare_cards);
 
     node = *deck;
-    for (i = 0; i < count; i++)
+    for (size_t i = 0; i < count; i++)
     {
         node->card = cards[i];
         node = node->next;
