@@ -1,2 +1,2 @@
 # 0x1B. C - Sorting algorithms & Big O
-in this project we wi 
+in this project we wil 
