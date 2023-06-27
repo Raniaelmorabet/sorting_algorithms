@@ -1,2 +1,2 @@
 # 0x1B. C - Sorting algorithms & Big O
-in this project we will work on sorting algo 
+in this project we will work on sorting algor 
